@@ -112,7 +112,7 @@
 
     // Retrieve the amount raised from localStorage
     let amountRaised = 0;
-    amountRaised = readFile();
+    amountRaised = parseInt(readFile(), 10);
 
     // Update the amount raised text dynamically
     document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
