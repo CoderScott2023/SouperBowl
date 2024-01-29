@@ -17,7 +17,7 @@
       height: 75vh;
       margin: 0;
       padding: 0;
-      color:e4e49c;
+      color: #e4e49c; /* Corrected color value */
     }
 
     h1 {
@@ -71,12 +71,9 @@
     <div class="goal-marker" style="left: 50%;"></div>
     <div class="goal-marker" style="left: 75%;"></div>
     <div class="goal-marker" style="left: 99.5%;"></div>
-    
-    <!--<div class="goal-label" style="left: 20%;">Mr. Ford gets<br> hired by State<br> Farm - $12000</div>
-    <div class="goal-label" style="left: 45%;">Mr.Hendricks sings<br> "We're Half Way<br> There" - $10000</div>-->
   </div>
 
-  <div class="money-raised" id="amountRaised">We've Raised: $60</div>
+  <div class="money-raised" id="amountRaised">We've Raised: $0</div>
 
   <script>
     // Function to update the progress bar based on the current fundraising amount
@@ -84,23 +81,31 @@
       const progressBar = document.getElementById('progressBar');
       progressBar.style.width = percentage + '%';
     }
-    function askProgress()
-    {
-      var a = prompt("what is the new money value");
-      let amountRaised = parseInt(a);
+
+    function askProgress() {
+      var newAmount = prompt("Enter the new fundraising amount:");
+      let amountRaised = parseInt(newAmount);
       const percentageRaised = (amountRaised / fundraisingGoal) * 100;
-      updateProgressBar(percentageRaised)
-      document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`    ;
+
+      // Save the new amount in localStorage
+      localStorage.setItem('amountRaised', amountRaised);
+
+      updateProgressBar(percentageRaised);
+      document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
     }
 
-    // Example: Set a fundraising goal of $20000 and input the amount already raised as $13478
+    // Example: Set a fundraising goal of $20000
     const fundraisingGoal = 20000;
-    let amountRaised = 0;
-    const percentageRaised = (amountRaised / fundraisingGoal) * 100;
+
+    // Retrieve the amount raised from localStorage
+    let amountRaised = localStorage.getItem('amountRaised');
+    amountRaised = amountRaised ? parseInt(amountRaised) : 0;
 
     // Update the amount raised text dynamically
     document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
 
+    // Calculate and update the progress bar
+    const percentageRaised = (amountRaised / fundraisingGoal) * 100;
     updateProgressBar(percentageRaised);
   </script>
 
