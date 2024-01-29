@@ -93,17 +93,19 @@
       updateProgressBar(percentageRaised);
       document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
     }
-     async function readFile() {
+     function readFile(callback) {
     const filePath = 'data.txt';
 
-    try {
-      const response = await fetch(filePath);
-      const fileContent = await response.text();
-      return parseInt(fileContent, 10) || 0; // Provide a default value of 0 if the file content is not a valid number
-    } catch (error) {
-      console.error('Error fetching file:', error.message);
-      return 0; // Provide a default value of 0 in case of an error
-    }
+    fetch(filePath)
+      .then(response => response.text())
+      .then(fileContent => {
+        const amountRaised = parseInt(fileContent, 10) || 0;
+        callback(null, amountRaised);
+      })
+      .catch(error => {
+        console.error('Error fetching file:', error.message);
+        callback(error, 0);
+      });
   }
     
 
@@ -116,15 +118,19 @@
     // Example: Set a fundraising goal of $20000
     const fundraisingGoal = 20000;
 
-    // Retrieve the amount raised from the file
-    let amountRaised = await readFile();
+   function initializeFundraising() {
+    const fundraisingGoal = 20000;
 
-    // Update the amount raised text dynamically
-    document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
+    readFile((error, amountRaised) => {
+      if (error) {
+        console.error('Error initializing fundraising:', error.message);
+        amountRaised = 0;
+      }
 
-    // Calculate and update the progress bar
-    const percentageRaised = (amountRaised / fundraisingGoal) * 100;
-    updateProgressBar(percentageRaised);
+      document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
+      const percentageRaised = (amountRaised / fundraisingGoal) * 100;
+      updateProgressBar(percentageRaised);
+    });
   }
 
   initializeFundraising();
