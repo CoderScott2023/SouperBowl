@@ -94,28 +94,25 @@
       updateProgressBar(percentageRaised);
       document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
     }
-    function readNumberFromFile() {
-      try {
-        // Read the content of the file (synchronously for simplicity)
-        const data = fs.readFileSync('data.txt', 'utf-8');
-    
-        // Parse the content to a number
-        const number = parseInt(data, 10);
+   async function readFile() {
+      const filePath = 'data.txt'; // Replace with the path to your text file
 
-        // Return the extracted number
-        return number;
-        } catch (error) {
-        console.error('Error reading the file:', error.message);
-        return null;
+      try {
+        const response = await fetch(filePath);
+        const fileContent = await response.text();
+
+        return fileContent;
+      } catch (error) {
+        console.error('Error fetching file:', error.message);
       }
-    }  
+    }
 
 
     // Example: Set a fundraising goal of $20000
     const fundraisingGoal = 20000;
 
     // Retrieve the amount raised from localStorage
-    let amountRaised = readNumberFromFile();
+    let amountRaised = readFile();
     amountRaised = amountRaised ? parseInt(amountRaised) : 0;
 
     // Update the amount raised text dynamically
