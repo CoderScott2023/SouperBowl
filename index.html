@@ -111,8 +111,8 @@
     const fundraisingGoal = 20000;
 
     // Retrieve the amount raised from localStorage
-    let amountRaised = readFile();
-    amountRaised = amountRaised ? parseInt(amountRaised) : 0;
+    let amountRaised = 0;
+    amountRaised = readFile();
 
     // Update the amount raised text dynamically
     document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
