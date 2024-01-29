@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundraising Thermometer</title>
+  <button onclick="askProgress()"></button>
+    <h1>Churchill Souper Bowl of Caring</h1>
+    
+  <style>
+    body {
+      font-family: 'Brush Script MT', cursive;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column; /* Added to stack header and thermometer */
+      height: 75vh;
+      margin: 0;
+      padding: 0;
+      color:e4e49c;
+    }
+
+    h1 {
+      margin: 0; /* Reset margin */
+      font-size: 70px;
+    }
+
+    .thermometer {
+      width: 95%; /* Full width of the page */
+      background-color: #d1d1d1;
+      border-radius: 10px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 80px;
+      background-color: #3498db;
+      border-radius: 5px;
+      position: relative;
+      width: 100%; /* Full width of the page */
+    }
+
+    .goal-marker {
+      position: absolute;
+      height: 120%; /* Increased height to make it thicker */
+      width: 4px; /* Increased width to make it thicker */
+      background-color: #e74c3c;
+      transform: translateX(-50%); /* Center the goal line */
+    }
+
+    .goal-label {
+      position: absolute;
+      top: 240px;
+      color: #e74c3c;
+      font-size: 16px;
+    }
+
+    .money-raised {
+      position: absolute;
+      bottom: 10px; /* Adjusted position */
+      color: #333;
+      font-size: 50px; /* Increased font size */
+    }
+  </style>
+</head>
+<body>
+  <div class="thermometer">
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="goal-marker" style="left: 25%;"></div>
+    <div class="goal-marker" style="left: 50%;"></div>
+    <div class="goal-marker" style="left: 75%;"></div>
+    <div class="goal-marker" style="left: 99.5%;"></div>
+    
+    <!--<div class="goal-label" style="left: 20%;">Mr. Ford gets<br> hired by State<br> Farm - $12000</div>
+    <div class="goal-label" style="left: 45%;">Mr.Hendricks sings<br> "We're Half Way<br> There" - $10000</div>-->
+  </div>
+
+  <div class="money-raised" id="amountRaised">We've Raised: $60</div>
+
+  <script>
+    // Function to update the progress bar based on the current fundraising amount
+    function updateProgressBar(percentage) {
+      const progressBar = document.getElementById('progressBar');
+      progressBar.style.width = percentage + '%';
+    }
+    function askProgress()
+    {
+      var a = prompt("what is the new money value");
+      let amountRaised = parseInt(a);
+      const percentageRaised = (amountRaised / fundraisingGoal) * 100;
+      updateProgressBar(percentageRaised)
+      document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`    ;
+    }
+
+    // Example: Set a fundraising goal of $20000 and input the amount already raised as $13478
+    const fundraisingGoal = 20000;
+    let amountRaised = 0;
+    const percentageRaised = (amountRaised / fundraisingGoal) * 100;
+
+    // Update the amount raised text dynamically
+    document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
+
+    updateProgressBar(percentageRaised);
+  </script>
+
+</body>
+</html>
