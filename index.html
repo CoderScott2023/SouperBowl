@@ -114,11 +114,7 @@
     const fundraisingGoal = 20000;
 
     // Retrieve the amount raised from localStorage
-    async function initializeFundraising() {
-    // Example: Set a fundraising goal of $20000
-    const fundraisingGoal = 20000;
-
-   function initializeFundraising() {
+    function initializeFundraising() {
     const fundraisingGoal = 20000;
 
     readFile((error, amountRaised) => {
@@ -131,7 +127,7 @@
       const percentageRaised = (amountRaised / fundraisingGoal) * 100;
       updateProgressBar(percentageRaised);
     });
-  }}
+  }
 
   initializeFundraising();
     let amountRaised = 0;
