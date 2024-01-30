@@ -5,7 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fundraising Thermometer</title>
   <style>
-    /* Your CSS styles remain unchanged */
+    body {
+      font-family: 'Brush Script MT', cursive;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column; /* Added to stack header and thermometer */
+      height: 75vh;
+      margin: 0;
+      padding: 0;
+      color: #e4e49c; /* Corrected color value */
+    }
+
+    h1 {
+      margin: 0; /* Reset margin */
+      font-size: 70px;
+    }
+
+    .thermometer {
+      width: 95%; /* Full width of the page */
+      background-color: #d1d1d1;
+      border-radius: 10px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 80px;
+      background-color: #3498db;
+      border-radius: 5px;
+      position: relative;
+      width: 100%; /* Full width of the page */
+    }
+
+    .goal-marker {
+      position: absolute;
+      height: 120%; /* Increased height to make it thicker */
+      width: 4px; /* Increased width to make it thicker */
+      background-color: #e74c3c;
+      transform: translateX(-50%); /* Center the goal line */
+    }
+
+    .goal-label {
+      position: absolute;
+      top: 240px;
+      color: #e74c3c;
+      font-size: 16px;
+    }
+
+    .money-raised {
+      position: absolute;
+      bottom: 10px; /* Adjusted position */
+      color: #333;
+      font-size: 50px; /* Increased font size */
+    }
   </style>
 </head>
 <body>
