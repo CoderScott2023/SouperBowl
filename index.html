@@ -91,90 +91,89 @@
 
   <script>
     function updateProgressBar(percentage) {
-      const progressBar = document.getElementById('progressBar');
-      progressBar.style.width = percentage + '%';
+        const progressBar = document.getElementById('progressBar');
+        progressBar.style.width = percentage + '%';
     }
 
     function askProgress() {
-      var newAmount = prompt("Enter the new fundraising amount:");
-      let amountRaised = parseInt(newAmount);
-      const percentageRaised = (amountRaised / fundraisingGoal) * 100;
+        var newAmount = prompt("Enter the new fundraising amount:");
+        let amountRaised = parseInt(newAmount);
+        const percentageRaised = (amountRaised / fundraisingGoal) * 100;
 
-      localStorage.setItem('amountRaised', amountRaised);
+        localStorage.setItem('amountRaised', amountRaised);
 
-      updateProgressBar(percentageRaised);
-      document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
+        updateProgressBar(percentageRaised);
+        document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
     }
 
     function readFile(callback) {
-      const filePath = 'data.txt';
+        const filePath = 'data.txt';
 
-      fetch(filePath)
-        .then(response => response.text())
-        .then(fileContent => {
-          const amountRaised = parseInt(fileContent, 10) || 0;
-          callback(null, amountRaised);
-        })
-        .catch(error => {
-          console.error('Error fetching file:', error.message);
-          callback(error, 0);
-        });
+        fetch(filePath)
+            .then(response => response.text())
+            .then(fileContent => {
+                const amountRaised = parseInt(fileContent, 10) || 0;
+                callback(null, amountRaised);
+            })
+            .catch(error => {
+                console.error('Error fetching file:', error.message);
+                callback(error, 0);
+            });
     }
 
     // Example: Set a fundraising goal of $20000
     const fundraisingGoal = 20000;
 
     function initializeFundraising() {
-      readFile((error, amountRaised) => {
-        if (error) {
-          console.error('Error initializing fundraising:', error.message);
-          amountRaised = 0;
-        }
+        readFile((error, amountRaised) => {
+            if (error) {
+                console.error('Error initializing fundraising:', error.message);
+                amountRaised = 0;
+            }
 
-        document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
-        const percentageRaised = (amountRaised / fundraisingGoal) * 100;
-        updateProgressBar(percentageRaised);
-      });
+            document.getElementById('amountRaised').textContent = `We've Raised: $${amountRaised}`;
+            const percentageRaised = (amountRaised / fundraisingGoal) * 100;
+            updateProgressBar(percentageRaised);
+        });
     }
 
     function wasatchReadFile(callback) {
-  const filePath = 'data.txt';
+        const filePath = 'data.txt';
 
-  fetch(filePath)
-    .then(response => response.text())
-    .then(fileContent => {
-      // Split the content into lines
-      const lines = fileContent.split('\n');
+        fetch(filePath)
+            .then(response => response.text())
+            .then(fileContent => {
+                // Split the content into lines
+                const lines = fileContent.split('\n');
 
-      // Extract the second line and parse as integer (or use default value 0)
-      const secondLineAmountRaised = parseInt(lines[1], 10) || 0;
+                // Extract the second line and parse as integer (or use default value 0)
+                const secondLineAmountRaised = parseInt(lines[1], 10) || 0;
 
-      callback(null, secondLineAmountRaised);
-    })
-    .catch(error => {
-      console.error('Error fetching file:', error.message);
-      callback(error, 0);
-    });
-}
-
-// Example: Set a fundraising goal of $20000
-const fundraisingGoal = 20000;
-
-function wasatchInitializeFundraising() {
-  wasatchReadFile((error, amountRaised) => {
-    if (error) {
-      console.error('Error initializing fundraising:', error.message);
-      amountRaised = 0;
+                callback(null, secondLineAmountRaised);
+            })
+            .catch(error => {
+                console.error('Error fetching file:', error.message);
+                callback(error, 0);
+            });
     }
 
-    document.getElementById('wasatchAmountRaised').textContent = `Wasatch Raised: $${amountRaised}`;
-    const percentageRaised = (amountRaised / fundraisingGoal) * 100;
-    updateProgressBar(percentageRaised);
-  });
-}
+    // Example: Set a fundraising goal of $20000
+    function wasatchInitializeFundraising() {
+        wasatchReadFile((error, amountRaised) => {
+            if (error) {
+                console.error('Error initializing fundraising:', error.message);
+                amountRaised = 0;
+            }
+
+            document.getElementById('wasatchAmountRaised').textContent = `Wasatch Raised: $${amountRaised}`;
+            const percentageRaised = (amountRaised / fundraisingGoal) * 100;
+            updateProgressBar(percentageRaised);
+        });
+    }
 
     initializeFundraising();
-      wasatchInitializeFunction();
-  </script>
+    wasatchInitializeFundraising();
+</script>
+
 </body>
 </html>
