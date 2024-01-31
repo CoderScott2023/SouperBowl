@@ -59,6 +59,12 @@
       color: #333;
       font-size: 50px; /* Increased font size */
     }
+      .money-raised1 {
+      position: absolute;
+      bottom: 70px; /* Adjusted position */
+      color: #333;
+      font-size: 50px; /* Increased font size */
+    }
   </style>
 </head>
 <body>
@@ -68,11 +74,18 @@
     <div class="progress-bar" id="progressBar"></div>
     <div class="goal-marker" style="left: 25%;"></div>
     <div class="goal-marker" style="left: 50%;"></div>
+      <div class="goal-marker" style="left: 60%;"></div>
     <div class="goal-marker" style="left: 75%;"></div>
     <div class="goal-marker" style="left: 99.5%;"></div>
+
+    <div class="goal-label" style="left: 96%;">Big Mystery Prize!!!</div>
+    <div class="goal-label" style="left: 20%;">SBO's Dye Their <br>Hair School Colors!</div>
+    <div class="goal-label" style="left: 47%;">Mystery Prize <br>Revealed!</div>
+      <div class="goal-label" style="left: 55%;">Krispy Creme Donuts and MR. Ford becomes Jake from State Farm</div>
   </div>
 
-  <div class="money-raised" id="amountRaised">We've Raised: $0</div>
+  <div class="money-raised1" id="amountRaised">We've Raised: $0</div>
+    <div class="money-raised" id="wasatchAmountRaised">Wasatch Raised: $0</div>
 
   <script>
     function updateProgressBar(percentage) {
@@ -122,7 +135,44 @@
       });
     }
 
+    function wasatchReadFile(callback) {
+  const filePath = 'data.txt';
+
+  fetch(filePath)
+    .then(response => response.text())
+    .then(fileContent => {
+      // Split the content into lines
+      const lines = fileContent.split('\n');
+
+      // Extract the second line and parse as integer (or use default value 0)
+      const secondLineAmountRaised = parseInt(lines[1], 10) || 0;
+
+      callback(null, secondLineAmountRaised);
+    })
+    .catch(error => {
+      console.error('Error fetching file:', error.message);
+      callback(error, 0);
+    });
+}
+
+// Example: Set a fundraising goal of $20000
+const fundraisingGoal = 20000;
+
+function wasatchInitializeFundraising() {
+  wasatchReadFile((error, amountRaised) => {
+    if (error) {
+      console.error('Error initializing fundraising:', error.message);
+      amountRaised = 0;
+    }
+
+    document.getElementById('wasatchAmountRaised').textContent = `Wasatch Raised: $${amountRaised}`;
+    const percentageRaised = (amountRaised / fundraisingGoal) * 100;
+    updateProgressBar(percentageRaised);
+  });
+}
+
     initializeFundraising();
+      wasatchInitializeFunction();
   </script>
 </body>
 </html>
