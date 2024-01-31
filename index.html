@@ -14,7 +14,7 @@
       height: 75vh;
       margin: 0;
       padding: 0;
-      color: #e4e49c; /* Corrected color value */
+      color: #000000; /* Corrected color value */
     }
 
     h1 {
@@ -45,11 +45,26 @@
       background-color: #e74c3c;
       transform: translateX(-50%); /* Center the goal line */
     }
+      .goal-marker1 {
+      position: absolute;
+      height: 60%; /* Increased height to make it thicker */
+      width: 4px; /* Increased width to make it thicker */
+      background-color: #e74c3c;
+      transform: translateX(-50%); /* Center the goal line */
+    }
 
     .goal-label {
       position: absolute;
       top: 240px;
       color: #e74c3c;
+      text-align: center;
+      font-size: 16px;
+    }
+      .goal-label1 {
+      position: absolute;
+      top: 180px;
+      color: #e74c3c;
+      text-align: center;
       font-size: 16px;
     }
 
@@ -78,12 +93,17 @@
     <div class="goal-marker" style="left: 50%;"></div>
       <div class="goal-marker" style="left: 60%;"></div>
     <div class="goal-marker" style="left: 75%;"></div>
+      <div class="goal-marker" style="left: 85%;"></div>
     <div class="goal-marker" style="left: 99.5%;"></div>
+      <div class="goal-marker1" style="left: 70%;"></div>
 
-    <div class="goal-label" style="left: 96%;">Big Mystery Prize!!!</div>
-    <div class="goal-label" style="left: 20%;">SBO's Dye Their <br>Hair School Colors!</div>
-    <div class="goal-label" style="left: 47%;">Mystery Prize <br>Revealed!</div>
-      <div class="goal-label" style="left: 55%;">Krispy Creme Donuts<br> and MR. Ford<br> becomes Jake from<br> State Farm</div>
+    <div class="goal-label" style="left: 96%;">$20,000:<br>Big Mystery Prize!!!</div>
+    <div class="goal-label" style="left: 20%;">$5,000:<br>SBO's Dye Their <br>Hair School Colors!</div>
+    <div class="goal-label" style="left: 46%;">$10,000:<br>Mystery<br> Prize <br>Revealed! and <br> Pie in Face<Br> of Principal</div>
+      <div class="goal-label" style="left: 55%;">12,000:<br>Krispy Creme Donuts<br> and MR. Ford<br> becomes Jake from<br> State Farm</div>
+      <div class="goal-label" style="left: 71.7%;">$15,000:<br>Surprise<br>Lunchtime</div>
+      <div class="goal-label" style="left: 81%;">$17,000:<br>Surprise<br>After School<br>Activity</div>
+      <div class="goal-label1" style="left: 67%;">$14,000:<br>Long<br>Lunch</div>
   </div>
 
   <div class="money-raised1" id="amountRaised">We've Raised: $0</div>
